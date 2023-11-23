@@ -1,3 +1,5 @@
+A sequence of Redis commands
+
 SET "Answer" 0: Sets the key "Answer" to the value 0.
 INCR "Answer": Increments the value of the key "Answer" by 1. After this command, "Answer" will have the value 1.
 INCR "Answer": Increments the value of the key "Answer" by 1 again. After this command, "Answer" will have the value 2.
