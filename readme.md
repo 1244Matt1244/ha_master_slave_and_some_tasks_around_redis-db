@@ -15,11 +15,8 @@ Goal of this task is to create scripts and resources enabling local Kubernetes, 
  * each script should have it's undo (inverse) "sister" script that deletes stuff
  * inverse scripts should start with prefix 99, decreasing with each new script, ie. `99-minikube-down.sh` deletes minikube installation created with `00-minikube-up.sh`
  * all services installed on kubernetes should be exposed "outside" Kubernetes to host service as well
- * It is okay if you don't know and don't finish task completely - please send any solution and reach out to us
- * If you have any questions - ask us on careers@opstergo.com
- * Deadline is one month from the moment you have recieved the task - take any needed time, it won't reflect the interview itself
 
-
+   
 ## Task
 
 ### Redis
@@ -53,7 +50,6 @@ Architect Redis master-slave installation, and implement it.
 `97-redis-info-downq.sh`
 
 Write k8s recurring task that will output result of redis command `INFO replication` every 1minute.
-
 
 
 ### Final polish
