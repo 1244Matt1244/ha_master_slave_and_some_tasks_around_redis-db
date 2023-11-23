@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: redis-info-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: redis-info
+        image: redis:latest
+        command: ["/bin/sh"]
+        args: ["-c", "/redis-info.sh"]
+      restartPolicy: OnFailure
+  backoffLimit: 2  # Set the backoff limit
+  ttlSecondsAfterFinished: 600  # Delete the job 10 minutes after it's completed
+
+

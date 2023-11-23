@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: redis-info-cronjob
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: redis-info-container
+            image: redis
+            command:
+            - "redis-cli"
+            - "-h"
+            - "$(REDIS_MASTER_HOST_PORT)"
+            - "INFO"
+            - "replication"
+          restartPolicy: OnFailure
