@@ -5,6 +5,6 @@ INCR "Answer": Increments the value of the key "Answer" by 1. After this command
 INCR "Answer": Increments the value of the key "Answer" by 1 again. After this command, "Answer" will have the value 2.
 INCRBY "Answer" 40: Increments the value of the key "Answer" by 40. After this command, "Answer" will have the value 42.
 SET "Hello" "World"  Sets the key "Hello" to the string value "World".
-MSET "Dev" "Ops" "Opstergo" "Interview" Sets multiple keys at once. After this command, "Dev" will have the value "Ops", and "Opstergo" will have the value "Interview"
+MSET "Dev" "Ops" "O..." "I..." Sets multiple keys at once. After this command, "Dev" will have the value "Ops", and "O..." will have the value "I..."
 
 These commands manipulate values in a Redis database. Note that these are basic commands, and in a real-world scenario, you might want to include error handling, especially when interacting with a database in a production environment.
