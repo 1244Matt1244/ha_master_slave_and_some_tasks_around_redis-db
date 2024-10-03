@@ -1,21 +1,11 @@
 #!/bin/bash
 
-# Start Minikube with 2 nodes
-minikube start --nodes 2
+echo "Starting Minikube..."
+minikube start --cpus=4 --memory=4096 --disk-size=20g
 
-# Enable Ingress controller
-minikube addons enable ingress
+if [ $? -ne 0 ]; then
+    echo "Error: Minikube failed to start." >&2
+    exit 1
+fi
 
-# Wait for Minikube to be ready
-kubectl wait --for=condition=Ready node -l '!node-role.kubernetes.io/master' --timeout=300s
-#!/bin/bash
-
-# Start Minikube with 2 nodes
-minikube start --nodes 2
-
-# Enable Ingress controller
-minikube addons enable ingress
-
-# Wait for Minikube to be ready
-kubectl wait --for=condition=Ready node -l '!node-role.kubernetes.io/master' --timeout=300s
-
+echo "Minikube started successfully!"
