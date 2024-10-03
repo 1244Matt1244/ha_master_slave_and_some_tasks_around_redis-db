@@ -1,6 +1,12 @@
-# Create a ConfigMap for the script
-kubectl create configmap redis-info-script --from-file=redis-info.sh
+#!/bin/bash
 
-# Create a CronJob to run the script every minute
-kubectl apply -f redis-info-cronjob.yaml
+echo "Retrieving Redis Info..."
 
+kubectl exec -it $(kubectl get pods -l app=redis-master -o jsonpath='{.items[0].metadata.name}') -- redis-cli INFO
+
+if [ $? -ne 0 ]; then
+    echo "Error: Unable to retrieve Redis info." >&2
+    exit 1
+fi
+
+echo "Redis info retrieved successfully!"
