@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-sentinel-config
+data:
+  sentinel.conf: |
+    sentinel monitor mymaster redis-master 6379 2
+    sentinel down-after-milliseconds mymaster 5000
+    sentinel failover-timeout mymaster 10000
+    sentinel parallel-syncs mymaster 1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-sentinel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-sentinel
+  template:
+    metadata:
+      labels:
+        app: redis-sentinel
+    spec:
+      containers:
+      - name: redis-sentinel
+        image: redis:6.2-alpine
+        command: ["redis-server", "/redis/sentinel.conf", "--sentinel"]
+        volumeMounts:
+        - name: sentinel-config
+          mountPath: /redis/sentinel.conf
+          subPath: sentinel.conf
+        ports:
+        - containerPort: 26379
+      volumes:
+      - name: sentinel-config
+        configMap:
+          name: redis-sentinel-config
